@@ -1079,7 +1079,7 @@ bot.on("message", function(message) {
             
         case "porngif":
         if (!message.channel.nsfw) return message.channel.send("This channel isn't nsfw!")
-        message.channel.send(porngifs[Math.floor(Math.random() * porngifs.length)])
+        message.channel.sendFile(porngifs[Math.floor(Math.random() * porngifs.length)])
         break;
 
         default:
