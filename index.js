@@ -1072,4 +1072,4 @@ bot.on("message", function(message) {
         break;
     };
 })
-bot.login(env.TOKEN)
+bot.login(process.env.TOKEN)
