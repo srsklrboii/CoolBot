@@ -820,6 +820,7 @@ bot.on("message", function(message) {
         var embed = new Discord.RichEmbed()
             .setAuthor("Invite me to your Discord server!")
             .addField("Thanks for wanting me to add you into your Discord server! The link is below:", "https://discordapp.com/api/oauth2/authorize?client_id=416496004699783190&permissions=268696759&scope=bot")
+            .addField("If you want to join my official Discord server, please do! The link is below:", "https://discord.gg/9JTSAvH")
             .setFooter("Credits: created by srsklrboii#5784")
             .setColor("RANDOM")
             message.channel.send(embed).catch(e => {
