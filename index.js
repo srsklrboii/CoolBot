@@ -7,6 +7,15 @@ const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
 
+var porngifs = [
+    "./nsfw/gifs/19131606.gif",
+    "./nsfw/gifs/19133372.gif",
+    "./nsfw/gifs/19133511.gif",
+    "./nsfw/gifs/19135837.gif",
+    "./nsfw/gifs/19166432.gif",
+    "./nsfw/gifs/19177200.gif",
+]
+
 var ball = [
     "Yes.",
     "No.",
@@ -1066,7 +1075,12 @@ bot.on("message", function(message) {
         var annihilatemember = message.mentions.users.first()
         if (!annihilatemember) return message.channel.send("You need to mention someone you want to annihilate!")
         message.channel.send(`${message.author}, you just annihilated **${annihilatemember.username}**! :gun: :knife: :dagger: :punch: :bomb: :scream:`)
-        break;    
+        break;
+            
+        case "porngif":
+        if (!message.channel.nsfw) return message.channel.send("This channel isn't nsfw!")
+        message.channel.send(porngifs[Math.floor(Math.random() * porngifs.length)])
+        break;
 
         default:
             message.channel.send("This command doesn't exist!");
