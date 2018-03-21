@@ -1066,7 +1066,7 @@ bot.on("message", function(message) {
         var annihilatemember = message.mentions.users.first()
         if (!annihilatemember) return message.channel.send("You need to mention someone you want to annihilate!")
         message.channel.send(`${message.author}, you just annihilated **${annihilatemember.username}**! :gun: :knife: :dagger: :punch: :bomb: :scream:`)
-        break;
+        break;    
 
         default:
             message.channel.send("This command doesn't exist!");
