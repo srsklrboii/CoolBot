@@ -6,6 +6,21 @@ const getYoutubeID = require("get-youtube-id")
 const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
+bot.commands = new Discord.Collection()
+
+fs.readdir("./commands/", (err, files) => {
+    if (err) console.log(err)
+    let jsfile = files.filter(f => f.split(".").pop() === "js")
+    if (jsfile.length <= 0) {
+        console.log("Couldn't find any commands :(")
+        return;
+    }
+    jsfile.forEach((f, i) => {
+        var props = require(`./commands/${f}`)
+        console.log(`${f loaded!}`)
+        bot.commands.set(props.help.name, props)
+    })
+})
 
 var porngifs = [
     "./nsfw/gifs/19131606.gif",
