@@ -788,6 +788,7 @@ bot.on("message", function(message) {
             .addField("Creation date", serverCreated[0] + ', ' + serverCreated[1] + ' ' + serverCreated[2] + ' ' + serverCreated[3] + ' at ' + serverCreated[4])
             .addField("Server ID", `${message.guild.id}`)
             .addField("Members", message.guild.memberCount)
+            .addField("Channels", message.guild.channels.toString())
             .setColor("RANDOM")
             .setFooter("Credits: created by srsklrboii#5784")
             message.channel.send(embed).catch(e => {
