@@ -6,7 +6,6 @@ const getYoutubeID = require("get-youtube-id")
 const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
-bot.commands = new Discord.Collection()
 
 var porngifs = [
     "./nsfw/gifs/19131606.gif",
