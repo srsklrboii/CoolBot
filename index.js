@@ -1086,10 +1086,10 @@ bot.on("message", async function(message) {
         break;
             
         case 'mute':
+            if (!message.author.hasPermission("MUTE_MEMBERS")) return message.channel.send("You do not have the permission to do this!")
             let tomute = message.mentions.members.first() || message.guild.members.get(args[0]);
-            if(!tomute) return message.reply('***:x: who df is that?***');
-            if(tomute.hasPermission('MANAGE_MESSAGES')) return message.channel.send('***:x: cant mute this person***');
-            if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('***:x: you think you own the place? sit the fuck down***')
+            if(!tomute) return message.reply('Please mention a valid member of this server!');
+            if(tomute.hasPermission('MUTE_MEMBERS')) return message.channel.send('I cannot mute this member since he/she is a mod/admin!');
             let muterole = message.guild.roles.find(`name`, 'muted');
             if(!muterole){
                 try{
@@ -1109,14 +1109,13 @@ bot.on("message", async function(message) {
                 }
             }
             await(tomute.addRole(muterole.id));
-            if(tomute.addRole(muterole.id)) return message.channel.send(`***:white_check_mark: ${tomute} has been muted***`);
+            if(tomute.addRole(muterole.id)) return message.channel.send(`${tomute} has been muted!`);
             break;
             
             case 'unmute':
+            if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('You do not have the permission to do this!')
             let untomute = message.mentions.members.first() || message.guild.members.get(args[0]);
-            if(!untomute) return message.reply('***:x: who df is that?***');
-            if(untomute.hasPermission('MANAGE_MESSAGES')) return message.channel.send('***:x: cant unmute this person***');
-            if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('***:x: you think you own the place? sit the fuck down***')
+            if(!untomute) return message.reply('Please mention a valid member of this server!');
             let unmuterole = message.guild.roles.find(`name`, 'muted');
             if(!unmuterole){
                 try{
@@ -1136,7 +1135,7 @@ bot.on("message", async function(message) {
                 }
             }
             await(untomute.removeRole(unmuterole.id));
-            if(untomute.removeRole(unmuterole.id)) return message.channel.send(`***:white_check_mark: ${untomute} has been unmuted***`);
+            if(untomute.removeRole(unmuterole.id)) return message.channel.send(`${untomute} has been unmuted!`);
             break;
 
         default:
