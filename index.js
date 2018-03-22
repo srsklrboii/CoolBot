@@ -1084,59 +1084,6 @@ bot.on("message", async function(message) {
         if (!message.channel.nsfw) return message.channel.send("This channel isn't nsfw!")
         message.channel.sendFile(porngifs[Math.floor(Math.random() * porngifs.length)])
         break;
-            
-        case 'mute':
-            if (!message.author.hasPermission("MUTE_MEMBERS")) return message.channel.send("You do not have the permission to do this!")
-            let tomute = message.mentions.members.first() || message.guild.members.get(args[0]);
-            if(!tomute) return message.reply('Please mention a valid member of this server!');
-            if(tomute.hasPermission('MUTE_MEMBERS')) return message.channel.send('I cannot mute this member since he/she is a mod/admin!');
-            let muterole = message.guild.roles.find(`name`, 'muted');
-            if(!muterole){
-                try{
-                    muterole = await message.guild.createRole({
-                        name: 'muted',
-                        color: '#000000',
-                        permissions:[]
-                    })
-                    message.guild.channels.forEach(async (channel, id) =>{
-                        await channel.overwritePermissions(muterole,{
-                            SEND_MESSAGES: false,
-                            ADD_REACTIONS: false
-                        });
-                    });
-                }catch(e){
-                    console.log(e.stack);
-                }
-            }
-            await(tomute.addRole(muterole.id));
-            if(tomute.addRole(muterole.id)) return message.channel.send(`${tomute} has been muted!`);
-            break;
-            
-            case 'unmute':
-            if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('You do not have the permission to do this!')
-            let untomute = message.mentions.members.first() || message.guild.members.get(args[0]);
-            if(!untomute) return message.reply('Please mention a valid member of this server!');
-            let unmuterole = message.guild.roles.find(`name`, 'muted');
-            if(!unmuterole){
-                try{
-                    unmuterole = await message.guild.createRole({
-                        name: 'muted',
-                        color: '#000000',
-                        permissions:[]
-                    })
-                    message.guild.channels.forEach(async (channel, id) =>{
-                        await channel.overwritePermissions(unmuterole,{
-                            SEND_MESSAGES: false,
-                            ADD_REACTIONS: false
-                        });
-                    });
-                }catch(e){
-                    console.log(e.stack);
-                }
-            }
-            await(untomute.removeRole(unmuterole.id));
-            if(untomute.removeRole(unmuterole.id)) return message.channel.send(`${untomute} has been unmuted!`);
-            break;
 
         default:
             message.channel.send("This command doesn't exist!");
