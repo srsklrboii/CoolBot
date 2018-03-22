@@ -1084,38 +1084,6 @@ bot.on("message", function(message) {
         if (!message.channel.nsfw) return message.channel.send("This channel isn't nsfw!")
         message.channel.sendFile(porngifs[Math.floor(Math.random() * porngifs.length)])
         break;
-            
-        case "mute":
-        var tomute = message.mentions.users.first()
-        if (!tomute) return message.channel.send("Please mention a valid member of this server!")
-        if (tomute.hasRole("MANAGE_MESSAGES")) return message.channel.send("I cannot mute this member since he/she is a mod/admin!")
-        var muterole = message.guild.roles.find("name", "Muted")
-        if (!muterole) {
-            try {
-                muterole = message.guild.createRole({
-                    name: "Muted",
-                    color: "#0xA9A9A9",
-                    permissions: []
-                })
-            message.guild.channels.forEach(channel, id => {
-                channel.overwritePermission(muterole, {
-                    SEND_MESSAGES = false,
-                    ADD_REACTIONS = false
-                })
-            })
-            }catch(e => {
-                console.error(e)      
-            })
-        }
-        let mutetime = args[2]
-        if (!mutetime) return message.channel.send("You did not specify a time!")
-        tomute.addRole(muterole.id)
-        message.channel.send(`${tomute} has been successfully muted.`)
-        setTimeout(function() {
-            tomute.removeRole(muterole.id)
-            message.channel.send(`${tomute} has been unmuted!`)
-        }, ms(mutetime))
-        break;
 
         default:
             message.channel.send("This command doesn't exist!");
