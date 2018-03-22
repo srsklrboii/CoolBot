@@ -701,7 +701,7 @@ bot.on('ready', () => {
     bot.user.setActivity('for ]help', { type: 'WATCHING' })
 });
 
-bot.on("message", function(message) {
+bot.on("message", async function(message) {
     let msg = message.content.toUpperCase();
     let sender = message.author;
     let cont = message.content.slice(PREFIX.length).split(" ");
