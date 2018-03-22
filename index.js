@@ -698,7 +698,7 @@ let queue = {}
 bot.on('ready', () => {
     console.log("CoolBot is up and running!")
     bot.user.setActivity("online")
-    bot.user.setActivity(`]help | CoolBot`)
+    bot.user.setActivity('for ]help', { type: 'WATCHING' })
 });
 
 bot.on("message", function(message) {
