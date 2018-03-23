@@ -699,12 +699,10 @@ var rps = [
 
 var rpswinlose = [
     "You won!",
-    "I won",
+    "I won!",
 ]
 
 var bot = new Discord.Client;
-
-let queue = {}
 
 bot.on('ready', () => {
     console.log("CoolBot is up and running!")
@@ -1083,7 +1081,7 @@ bot.on("message", async function(message) {
         case "bomb":
         var bombmember = message.mentions.users.first()
         if (!bombmember) return message.channel.send("You need to mention a person you want to bomb!")
-        message.channel.send(`${message.author}, you just bombd **${bombmember.username}**! :bomb: :scream:`)
+        message.channel.send(`${message.author}, you just bombed **${bombmember.username}**! :bomb: :scream:`)
         break;
 
         case "annihilate":
@@ -1099,7 +1097,7 @@ bot.on("message", async function(message) {
             
         case "rps":
         if (!args[1]) return message.channel.send("You need to specify something to battle me with!")
-        message.channel.send(`You chose ${args[1]} while I chose ${rps[Math.floor(Math.random() * rps.length)]}!`)
+        message.channel.send(`You chose **${args[1]}** while I chose **${rps[Math.floor(Math.random() * rps.length)]}**!`)
         message.channel.send(rpswinlose[Math.floor(Math.random() * rpswinlose.length)])
         break;
 
