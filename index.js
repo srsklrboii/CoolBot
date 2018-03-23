@@ -1098,8 +1098,7 @@ bot.on("message", async function(message) {
         break;
             
         case "rps":
-        if (!args[1]) return message.channel.send("You need to specify either ``rock``, ``paper``, or ``scissors``!")
-        if (!args[1] == "rock" || "Rock" || "paper" || "Paper" || "scissors" || "Scissors") return message.channel.send("You need to specify either ``rock``, ``paper``, or ``scissors``!")
+        if (!args[1]) return message.channel.send("You need to specify something to battle me with!")
         message.channel.send(`You chose ${args[1]} while I chose ${rps[Math.floor(Math.random() * rps.length)]}!`)
         message.channel.send(rpswinlose[Math.floor(Math.random() * rpswinlose.length)])
         break;
