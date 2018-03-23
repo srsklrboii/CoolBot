@@ -880,6 +880,8 @@ bot.on("message", async function(message) {
         case "purge":
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You do not have the permission to do this!")
             if (!args[1]) return message.channel.send("Please specify a number!")
+            if (args[1] >= 100) return message.channel.send("Please specify a number between 1 and 100!")
+            if (args[1] <= 1) return message.channel.send("Please specify a number between 1 and 100!")
             if (isNaN(args[1])) return message.channel.send("Please specify a vaild number!")
             message.delete();
             message.channel.bulkDelete(args[1]).catch(e => {
