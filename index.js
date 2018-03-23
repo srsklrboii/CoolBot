@@ -691,6 +691,17 @@ var roasts = [
     "You look like the kind of guy who wouldn't know who he was even after he was told who he was.",
 ]
 
+var rps = [
+    "Rock",
+    "Paper",
+    "Scissors",
+]
+
+var rpswinlose = [
+    "You won!",
+    "I won",
+]
+
 var bot = new Discord.Client;
 
 let queue = {}
@@ -1084,6 +1095,29 @@ bot.on("message", async function(message) {
         case "porngif":
         if (!message.channel.nsfw) return message.channel.send("This channel isn't nsfw!")
         message.channel.sendFile(porngifs[Math.floor(Math.random() * porngifs.length)])
+        break;
+            
+        case "rps":
+        if (!args[1]) return message.channel.send("You need to specify either ``rock``, ``paper``, or ``scissors``!")
+        if (args[1] == "rock" || "Rock") {
+            message.channel.send(`You chose ${args[1]}, while I chose ${rps[Math.floor(Math.random() * rps.length)]}!`)
+            message.channel.send(rpswinlose[Math.floor(Math.random() * rps.length)])
+            return;
+        }
+        if (args[1] == "paper" || "Paper") {
+            message.channel.send(`You chose ${args[1]}, while I chose ${rps[Math.floor(Math.random() * rps.length)]}!`)
+            message.channel.send(rpswinlose[Math.floor(Math.random() * rps.length)])
+            return;
+        }
+        if (args[1] == "scissors" || "Scissors") {
+            message.channel.send(`You chose ${args[1]}, while I chose ${rps[Math.floor(Math.random() * rps.length)]}!`)
+            message.channel.send(rpswinlose[Math.floor(Math.random() * rps.length)])
+            return;
+        }
+        else {
+            message.channel.send("You need to specify either ``rock``, ``paper``, or ``scissors``!")
+            return;
+        }
         break;
 
         default:
