@@ -764,6 +764,7 @@ bot.on("message", async function(message) {
                 .setAuthor(`User info for ${userinfotoget.username}`)
                 .addField("Discord name", `${userinfotoget.username}`)
                 .addField("Discord ID", `${userinfotoget.id}`)
+                .addField("Highest Role", `${userinfotoget.member.highestRole.name}`)
                 .setThumbnail(userinfotoget.avatarURL)
                 .setFooter("Credits: made by srsklrboii#5784")
                 .setColor("RANDOM")
