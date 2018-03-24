@@ -905,9 +905,8 @@ bot.on("message", async function(message) {
         break;
 
         case "say":
-        var author = message.author
         message.delete()
-        message.channel.send(args.join(" ").slice(3)
+        message.channel.send(args.join(" ").slice(3))
         break;
 
         case "gayrate":
