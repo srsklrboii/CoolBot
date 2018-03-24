@@ -6,6 +6,7 @@ const getYoutubeID = require("get-youtube-id")
 const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
+const urban = require("urban")
 
 var porngifs = [
     "./nsfw/gifs/19131606.gif",
@@ -1106,6 +1107,24 @@ bot.on("message", async function(message) {
         case "noticeme":
         message.channel.send(`${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author}`)
         message.channel.send("There, you just got noticed.")
+        break;
+            
+        case "urban":
+        if (args.length < 1) return message.channel.send("Please provide a valid word you would like to look up.")
+        let str = args.join(" ")
+        urban(str).first(json => {
+            if (!json) return message.channel.send("I could not find a valid definition on UD!")
+            console.log(json)
+            var embed = new Discord.RichEmbed()
+                .setTitle(json.word)
+                .setDescription(json.definition)
+                .addField("Upvotes", json.thumbs_up, true)
+                .addField("Downvotes", json.thumbs_down, true)
+                .setFooter("Created by srsklrboii#5784")
+            message.channel.send(embed).catch(e => {
+                console.error(e)
+            })
+        })
         break;
 
         default:
