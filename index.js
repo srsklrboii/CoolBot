@@ -1101,6 +1101,42 @@ bot.on("message", async function(message) {
         message.channel.send(`${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author}`)
         message.channel.send("There, you just got noticed.")
         break;
+            
+        case "mute":
+        if (!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send("You do not have the permission to do this!")
+        let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+        if(!tomute) return message.reply("Please specify a valid user!");
+        if(tomute.hasPermission("MUTE_MEMBERS")) return message.reply("I cannot mute this member since he/she is a mod/admin!");
+        let muterole = message.guild.roles.find(`name`, "muted");
+        if(!muterole){
+            try{
+                muterole = await message.guild.createRole({
+                name: "muted",
+                color: "#000000",
+                permissions:[]
+            })
+            message.guild.channels.forEach(async (channel, id) => {
+            await channel.overwritePermissions(muterole, {
+                SEND_MESSAGES: false,
+                ADD_REACTIONS: false
+            });
+        });
+        }catch(e){
+        console.log(e.stack);
+            }
+        }
+        await(tomute.addRole(muterole.id));
+        message.channel.send(`${tomute} has been successfully muted!`)
+        break;
+            
+        case "unmute":
+        var unmuterole = message.guild.roles.find("name", "muted")
+        if (!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send("You do not have the permission to do this!")
+        var tounmute = message.guild.member(message.mentions.users.first() || message.quild.members.get(args[0]))
+        if (!tounmute) return message.channel.send("Please specify a valid user!")
+        await(tounmute.removeRole(unmuterole.id))
+        message.channel.send(`${tounmute} has been successfully unmuted!`)
+        break;
 
         default:
             message.channel.send("This command doesn't exist!");
