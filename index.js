@@ -6,6 +6,7 @@ const getYoutubeID = require("get-youtube-id")
 const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
+const urban = require("urban")
 
 var porngifs = [
     "./nsfw/gifs/19131606.gif",
@@ -1136,6 +1137,24 @@ bot.on("message", async function(message) {
         if (!tounmute) return message.channel.send("Please specify a valid user!")
         await(tounmute.removeRole(unmuterole.id))
         message.channel.send(`${tounmute} has been successfully unmuted!`)
+        break;
+            
+        case "urban":
+        if (args.length < 1) return message.channel.send("Please specify a string of words that you would like to search on Urban Dictionary.")
+        let str = args.join(" ").slice(5)
+        urban(str).first(json => {
+            if (!json) return message.channel.send("There were no search results for that.")
+            var embed = new Discord.RichEmbed()
+                .setAuthor("Urban Dictionary search for: " + json.word)
+                .addField("Definition", json.definition)
+                .addField("Upvotes", json.thumbs_up, true)
+                .addField("Downvotes", json.thumbs_down, true)
+                .setFooter("Created by srsklrboii#5784")
+                .setColor("RANDOM")
+            message.channel.send(embed).catch(e => {
+                console.error(e)
+            })
+        })
         break;
 
         default:
