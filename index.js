@@ -795,7 +795,6 @@ bot.on("message", async function(message) {
             .addField("Creation date", serverCreated[0] + ', ' + serverCreated[1] + ' ' + serverCreated[2] + ' ' + serverCreated[3] + ' at ' + serverCreated[4])
             .addField("Server ID", `${message.guild.id}`)
             .addField("Members", message.guild.memberCount)
-            .addField("Channels", message.guild.channels.toString())
             .setColor("RANDOM")
             .setFooter("Credits: created by srsklrboii#5784")
             message.channel.send(embed).catch(e => {
@@ -810,7 +809,6 @@ bot.on("message", async function(message) {
             .addField("Username", `${bot.user}`)
             .addField("ID", `${bot.user.id}`)
             .addField("Created Date", '**' + botCreated[0] + ', ' + botCreated[1] + ' ' + botCreated[2] + ' ' + botCreated[3] + '** at **' + botCreated[4] + '**.')
-            .addField("Uptime since restart", "``" + bot.uptime + "`` ms")
             .setThumbnail(bot.avatarURL)
             .setColor("RANDOM")
             .setFooter("Credits: created by srsklrboii#5784")
