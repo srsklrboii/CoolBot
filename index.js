@@ -703,6 +703,109 @@ var rpswinlose = [
     "I won!",
 ]
 
+var bisexualrate = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "60",
+    "61",
+    "62",
+    "63",
+    "64",
+    "65",
+    "66",
+    "67",
+    "68",
+    "69",
+    "70",
+    "71",
+    "72",
+    "73",
+    "74",
+    "75",
+    "76",
+    "77",
+    "78",
+    "79",
+    "80",
+    "81",
+    "82",
+    "83",
+    "84",
+    "85",
+    "86",
+    "87",
+    "88",
+    "89",
+    "90",
+    "91",
+    "92",
+    "93",
+    "94",
+    "95",
+    "96",
+    "97",
+    "98",
+    "99",
+    "100",
+]
+
 var bot = new Discord.Client;
 
 bot.on('ready', () => {
@@ -1110,7 +1213,7 @@ bot.on("message", async function(message) {
         if(!muterole){
             try{
                 muterole = await message.guild.createRole({
-                name: "muted",
+                name: "Muted",
                 color: "#000000",
                 permissions:[]
             })
@@ -1120,7 +1223,7 @@ bot.on("message", async function(message) {
                 ADD_REACTIONS: false
             });
         });
-        }catch(e){
+        } catch(e){
         console.log(e.stack);
             }
         }
@@ -1152,6 +1255,29 @@ bot.on("message", async function(message) {
             message.channel.send(embed).catch(e => {
                 console.error(e)
             })
+        })
+        break;
+            
+        case "bisexualrate":
+        var bisexualmember = message.mentions.users.first()
+        if (!bisexualmember) {
+            var embed = new Discord.RichEmbed()
+                .setAuthor("Bisexual Rate")
+                .addField("Bixesual rate below :gay_pride_flag:", `You are ${bisexualrate[Math.floor(Math.random * bisexualrate.length)]}% bisexual.`)
+                .setFooter("Created by srsklrboii#5784")
+                .setColor("RANDOM")
+            message.channel.send(embed).catch(e => {
+                console.error(e)
+            })
+            return;
+        }
+        var bisexualembed = new Discord.RichEmbed()
+            .setAuthor("Bisexual Rate")
+            .addField("Bisexual rate below :gay_pride_flag:", `${bisexualmember.username} is ${bisexualrate[Math.floor(Math.random() * bisexualrate.length)]}% bisexual.`)
+            .setFooter("Created by srsklrboii#5784")
+            .setColor("RANDOM")
+        message.channel.send(bisexualembed).catch(e => {
+            console.error(e)
         })
         break;
 
