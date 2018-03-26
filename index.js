@@ -1286,6 +1286,12 @@ bot.on("message", async function(message) {
             console.error(e)
         })
         break;
+            
+        case "ascii":
+        var toConvert = args.join(" ").slice(5)
+        if (!toConvert) return message.channel.send("Please specify a string of text that you would like to convert to ASCII!")
+        message.channel.send("```" + figlet(toConvert) + "```")
+        break;
 
         default:
             message.channel.send("This command doesn't exist!");
