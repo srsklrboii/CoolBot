@@ -13,6 +13,7 @@ const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
 const urban = require("urban")
+const figlet = require("figlet")
 
 var porngifs = [
     "./nsfw/gifs/19131606.gif",
@@ -1269,7 +1270,7 @@ bot.on("message", async function(message) {
         if (!bisexualmember) {
             var embed = new Discord.RichEmbed()
                 .setAuthor("Bisexual Rate")
-                .addField("Bixesual rate below :gay_pride_flag:", `You are ${bisexualrate[Math.floor(Math.random * bisexualrate.length)]}% bisexual.`)
+                .addField("Bixesual rate below :gay_pride_flag:", `You are ${bisexualrate[Math.floor(Math.random() * bisexualrate.length)]}% bisexual.`)
                 .setFooter("Created by srsklrboii#5784")
                 .setColor("RANDOM")
             message.channel.send(embed).catch(e => {
