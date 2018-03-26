@@ -1,5 +1,11 @@
+/*
+    CoolBot Discord Bot created by srsklrboii#5784
+    Add it here: https://coolbotdiscordbot.weebly.com/
+    You can fork this project to make it your own, but you have to leave credits.
+*/
 const Discord = require("discord.js");
 const PREFIX = "]";
+//const TOKEN = "token here"; (this is if you want to local host it; this bot is running on heroku)
 const fs = require('fs');
 const YTDL = require("ytdl-core")
 const getYoutubeID = require("get-youtube-id")
@@ -1209,7 +1215,7 @@ bot.on("message", async function(message) {
         let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
         if(!tomute) return message.reply("Please specify a valid user!");
         if(tomute.hasPermission("MUTE_MEMBERS")) return message.reply("I cannot mute this member since he/she is a mod/admin!");
-        let muterole = message.guild.roles.find(`name`, "muted");
+        let muterole = message.guild.roles.find(`name`, "Muted");
         if(!muterole){
             try{
                 muterole = await message.guild.createRole({
@@ -1243,13 +1249,13 @@ bot.on("message", async function(message) {
         case "urban":
         if (args.length < 1) return message.channel.send("Please specify a string of words that you would like to search on Urban Dictionary.")
         let str = args.join(" ").slice(5)
-        urban(str).first(json => {
-            if (!json) return message.channel.send("There were no search results for that.")
+        urban(str).first(search => {
+            if (!search) return message.channel.send("There were no search results for that.")
             var embed = new Discord.RichEmbed()
-                .setAuthor("Urban Dictionary search for: " + json.word)
-                .addField("Definition", json.definition)
-                .addField("Upvotes", json.thumbs_up, true)
-                .addField("Downvotes", json.thumbs_down, true)
+                .setAuthor("Urban Dictionary search for: " + search.word)
+                .addField("Definition", search.definition)
+                .addField("Upvotes", search.thumbs_up, true)
+                .addField("Downvotes", search.thumbs_down, true)
                 .setFooter("Created by srsklrboii#5784")
                 .setColor("RANDOM")
             message.channel.send(embed).catch(e => {
@@ -1287,3 +1293,4 @@ bot.on("message", async function(message) {
     };
 })
 bot.login(process.env.TOKEN)
+//bot.login(TOKEN) (this is if your are local hosting the bot; this is running on heroku)
