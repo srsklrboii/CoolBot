@@ -13,7 +13,6 @@ const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
 const ms = require("ms")
 const urban = require("urban")
-const figlet = require("figlet")
 
 var porngifs = [
     "./nsfw/gifs/19131606.gif",
@@ -1286,12 +1285,6 @@ bot.on("message", async function(message) {
         message.channel.send(bisexualembed).catch(e => {
             console.error(e)
         })
-        break;
-            
-        case "ascii":
-        var toConvert = args.join(" ").slice(5)
-        if (!toConvert) return message.channel.send("Please specify a string of text that you would like to convert to ASCII!")
-        message.channel.send("```" + figlet(toConvert) + "```")
         break;
 
         default:
