@@ -7,7 +7,7 @@ const Discord = require("discord.js");
 const PREFIX = "]";
 //const TOKEN = "token here"; (this is if you want to local host it; this bot is running on heroku)
 const fs = require('fs');
-const YTDL = require("ytdl-core")
+const ytdl = require("ytdl-core")
 const getYoutubeID = require("get-youtube-id")
 const fetchVideoInfo = require("youtube-info")
 const ffmpeg = require("ffmpeg-binaries")
@@ -1286,6 +1286,31 @@ bot.on("message", async function(message) {
             console.error(e)
         })
         break;
+            
+        case "play":
+        var voiceChannel = message.member.voiceChannel
+        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
+        if (!voiceChannel.joinable) return message.channel.send("I cannot join that voice channel!")
+        try {
+            var connection = await voiceChannel.join()
+        } catch (error) {
+            message.channel.send("I could not join the voice channel for an undefined reason!")
+        }
+        var dispatcher = connection.playStream(ytdl(args[1]))
+            .on('end', () => {
+                message.channel.send("Song has ended!")
+                voiceChannel.leave()
+            })
+        dispatcher.setVolumeLogarithmic(5 / 5)
+        break;
+            
+        case "stop":
+        var voiceChannel = message.member.voiceChannel
+        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
+        voiceChannel.leave()
+        message.channel.send("I have successfully left the voice channel!")
+        break;
+        
 
         default:
             message.channel.send("This command doesn't exist!");
