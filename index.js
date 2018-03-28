@@ -1124,7 +1124,11 @@ bot.on("message", async function(message) {
         if (args.length < 1) return message.channel.send("Please specify a string of words that you would like to search on Urban Dictionary.")
         let str = args.join(" ").slice(5)
         urban(str).first(search => {
-            if (!search) return message.channel.send("There were no search results for that.")
+            if (!search) return message.channel.send("There were no search results for that.").catch(e => {
+                message.channel.send("There was an error!")
+                console.error(e)
+                return;
+            }
             var embed = new Discord.RichEmbed()
                 .setAuthor("Urban Dictionary search for: " + search.word)
                 .addField("Definition", search.definition)
@@ -1184,7 +1188,6 @@ bot.on("message", async function(message) {
         voiceChannel.leave()
         message.channel.send("I have successfully left the voice channel!")
         break;
-        
 
         default:
             message.channel.send("This command doesn't exist!");
