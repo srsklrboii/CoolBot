@@ -1159,7 +1159,7 @@ bot.on("message", async function(message) {
         }
         var dispatcher = connection.playStream(ytdl("https://www.youtube.com/watch?v=Fs3BHRIyF2E"))
             .on('end', () => {
-                
+                voiceChannel.leave()
             })
         dispatcher.setVolumeLogarithmic(5 / 5)
         break;
