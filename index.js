@@ -64,16 +64,6 @@ var tensided = [
     "10",
 ]
 
-var rudeball = [
-    "no u",
-    "go fuck urself",
-    "go die in a hole",
-    "fuck off",
-    "you dont deserve to live",
-    "fuck you i dont want no ravioli nigga",
-    "die... just die...",
-]
-
 var gayrate = [
     "1",
     "2",
@@ -868,15 +858,6 @@ bot.on("message", async function(message) {
         case "10sided":
         message.channel.send("You rolled a **" + tensided[Math.floor(Math.random() * tensided.length)] + "**!");
         break;
-
-        case "rudeball":
-        if (args[1]) {
-            message.channel.send(rudeball[Math.floor(Math.random() * rudeball.length)]);
-            return;
-        } else {
-            message.channel.send("ask a fucking question you fucking retard");
-            return;
-        }
 
         case "purge":
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You do not have the permission to do this!")
