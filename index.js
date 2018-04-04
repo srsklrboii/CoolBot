@@ -1131,7 +1131,7 @@ bot.on("message", async function(message) {
         try {
             var connection = await voiceChannel.join()
         } catch (error) {
-            message.channel.send("I could not join the voice channel for an undefined reason!")
+            message.channel.send("I could not play in the voice channel for an undefined reason!")
         }
         var dispatcher = connection.playStream(ytdl(args[1]))
             .on('end', () => {
@@ -1146,6 +1146,22 @@ bot.on("message", async function(message) {
         if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
         voiceChannel.leave()
         message.channel.send("I have successfully left the voice channel!")
+        break;
+            
+        case "nootnoot":
+        var voiceChannel = message.member.voiceChannel
+        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
+        if (!voiceChannel.joinable) return message.channel.send("I cannot join that voice channel!")
+        try {
+            var connection = await voiceChannel.join()
+        } catch (error) {
+            message.channel.send("I could not play in the voice channel for an undefined reason!")
+        }
+        var dispatcher = connection.playStream(ytdl("https://www.youtube.com/watch?v=Fs3BHRIyF2E"))
+            .on('end', () => {
+                
+            })
+        dispatcher.setVolumeLogarithmic(5 / 5)
         break;
 
         default:
