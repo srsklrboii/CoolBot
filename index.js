@@ -1139,6 +1139,7 @@ bot.on("message", async function(message) {
                 voiceChannel.leave()
             })
         dispatcher.setVolumeLogarithmic(5 / 5)
+        message.channel.send(`Now playing ${args[1]}`)
         break;
             
         case "stop":
