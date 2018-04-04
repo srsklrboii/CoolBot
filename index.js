@@ -1164,10 +1164,6 @@ bot.on("message", async function(message) {
             })
         dispatcher.setVolumeLogarithmic(5 / 5)
         break;
-
-        default:
-            message.channel.send("This command doesn't exist!");
-        break;
     };
 })
 bot.login(process.env.TOKEN)
