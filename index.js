@@ -227,7 +227,7 @@ bot.on('message', async function(message) {
         break;
 
         case "noticeme":
-        message.channel.send(`${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username} ${message.author.username}\nThere you just got noticed.`)
+        message.channel.send(`${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author} ${message.author}\nThere you just got noticed.`)
         break;
 
         case "userinfo":
