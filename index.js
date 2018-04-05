@@ -661,6 +661,7 @@ bot.on('message', async function(message) {
         message.channel.send(embed).catch(e => {
             message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
         })
+	break;
 
         case "invite":
         message.channel.send("Thank you for taking the time to invite me to your Discord server! The link is below:\nhttps://discordapp.com/api/oauth2/authorize?client_id=416496004699783190&permissions=8&scope=bot")
