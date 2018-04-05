@@ -648,6 +648,27 @@ bot.on('message', async function(message) {
         await(tounmute.removeRole(unmuterole.id))
         message.channel.send(`${tounmute} has been successfully unmuted!`)
         break;
+		    
+	case "botinfo":
+        var embed = new Discord.RichEmbed()
+            .setAuthor("Info for me!")
+            .addField("Name", bot.user.username)
+            .addField("Discriminator", bot.user.discriminator)
+            .addField("ID", bot.user.id)
+            .setThumbnail(bot.user.avatarURL)
+            .setFooter(`Credits: created by ${owner}`)
+            .setColor("RANDOM")
+        message.channel.send(embed).catch(e => {
+            message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
+        })
+
+        case "invite":
+        message.channel.send("Thank you for taking the time to invite me to your Discord server! The link is below:\nhttps://discordapp.com/api/oauth2/authorize?client_id=416496004699783190&permissions=8&scope=bot")
+        break;
+
+        case "credits":
+        message.channel.send(`I was created by ${owner}!`)
+        break;
     }
 })
 bot.login(process.env.TOKEN)
