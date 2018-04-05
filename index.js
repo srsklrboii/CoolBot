@@ -202,6 +202,7 @@ bot.on('message', async function(message) {
             .addField("Please join our Discord server! It really helps us grow!", "https://discord.gg/9JTSAvH")
             .addField("Please consider upvoting our bot at Discord Bots, it well and truly helps us grow!", "https://discordbots.org/bot/416496004699783190?")
             .setFooter(`Credits: created by ${owner}`)
+	    .setColor("RANDOM")
         message.author.send(embed).catch(e => {
             message.channel.send("Woops! Looks like I can't send messages/embeds to you! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
         })
