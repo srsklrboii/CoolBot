@@ -184,6 +184,7 @@ bot.on('message', async function(message) {
 
     switch (args[0].toLowerCase()) {
         case "help":
+	message.channel.send(`Commands are in your DM's, ${message.author}!`)
         var embed = new Discord.RichEmbed()
             .setAuthor("Available Commands")
             .addField("Normal Commands", "]help, ]ping, ]pong, ]cookie, ]say <whatever here>, ]noticeme")
@@ -204,6 +205,7 @@ bot.on('message', async function(message) {
         message.author.send(embed).catch(e => {
             message.channel.send("Woops! Looks like I can't send messages/embeds to you! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
         })
+	break;
 
         case "ping":
         message.channel.send(`:ping_pong: Pong! It took ${bot.ping}ms to deliver this message!`)
