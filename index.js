@@ -5,7 +5,7 @@
 */
 const Discord = require("discord.js")
 const prefix = "]"
-const owner = "srsklrboii#5784"
+const owner = "[YT] iCodeZz#5784"
 const ytdl = require("ytdl-core")
 const Fortnite = require("fortnite")
 const stats = new Fortnite(process.env.TRN)
