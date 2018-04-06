@@ -1,5 +1,5 @@
 /*
-    CoolBot Discord bot created by srsklrboii#5784
+    CoolBot Discord bot created by [YT] iCodeZz#5784
     This bot was entirely rewritten on Friday the 6th of April, 2018 (yeet)
     You can skid off some commands, but you cant fork the project.
 */
