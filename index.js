@@ -196,6 +196,7 @@ bot.on('message', async function(message) {
             .addField("Music Commands", "]play <youtube url>, ]stop")
             .addField("Fun Music Commands", "]nootnoot, ]imgay")
             .addField("Search Commands", "]search <search query here>, ]fortnite <pc/xb1/ps4> <player name>")
+	    .addField("Animals", "]dog, ]cat")
             .addField("Moderation Commands", "]kick <user> <reason>, ]ban <user> <reason>, ]purge <number between 1 and 100>, ]mute <user>, ]unmute <user>")
             .addField("Other Commands", "]botinfo, ]invite, ]credits")
             .addBlankField()
@@ -564,12 +565,38 @@ bot.on('message', async function(message) {
 				.setFooter("Credits: created by srsklrboii#5784")
 				.setColor("RANDOM")
 			message.channel.send(embed).catch(e => {
-				console.error(e)
+				message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
 			})
 		}).catch(e => {
 			message.channel.send("The player wasn't found!")
 		})
         break;
+		    
+	case "dog":
+		let {dog} = await superagent
+		.get(`http://random.dog/woof.json`);
+		var embed = new Discord.RichEmbed()
+			.setAuthor("Here's a dog for you!")
+			.setImage(dog.url)
+			.setFooter("Credits: created by srsklrboii#5784")
+			.setColor("RANDOM")
+		message.channel.send(embed).catch(e => {
+			message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
+		})
+	break;
+		    
+	case "cat":
+		let {cat} = await superagent
+		.get(`http://random.cat/meow`);
+		var embed = new Discord.RichEmbed()
+			.setAuthor("Here's a cat for you!")
+			.setImage(cat.url)
+			.setFooter("Credits: created by srsklrboii#5784")
+			.setColor("RANDOM")
+		message.channel.send(embed).catch(e => {
+			message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
+		})
+	break;
         
         case "kick":
         if (!message.member.hasPermission("KICK_MEMBERS")) return message.reply("You do not have the permission to do this!");
