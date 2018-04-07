@@ -578,7 +578,7 @@ bot.on('message', async function(message) {
 		var embed = new Discord.RichEmbed()
 			.setAuthor("Here's a dog for you!")
 			.setImage(dog.url)
-			.setFooter("Credits: created by srsklrboii#5784")
+			.setFooter(`Credits: created by ${owner}`)
 			.setColor("RANDOM")
 		message.channel.send(embed).catch(e => {
 			message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
@@ -591,7 +591,7 @@ bot.on('message', async function(message) {
 		var embed = new Discord.RichEmbed()
 			.setAuthor("Here's a cat for you!")
 			.setImage(cat.url)
-			.setFooter("Credits: created by srsklrboii#5784")
+			.setFooter(`Credits: created by ${owner}`)
 			.setColor("RANDOM")
 		message.channel.send(embed).catch(e => {
 			message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
