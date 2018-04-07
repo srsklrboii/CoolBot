@@ -585,19 +585,6 @@ bot.on('message', async function(message) {
 			message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
 		})
 	break;
-		    
-	case "cat":
-		let {body} = await superagent
-		.get(`https://cheweybot.ga/api/cat`);
-		var embed = new Discord.RichEmbed()
-			.setAuthor("Here's a cat for you!")
-			.setImage(body.url)
-			.setFooter(`Credits: created by ${owner}, api by Chewey#1635`)
-			.setColor("RANDOM")
-		message.channel.send(embed).catch(e => {
-			message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
-		})
-	break;
         
         case "kick":
         if (!message.member.hasPermission("KICK_MEMBERS")) return message.reply("You do not have the permission to do this!");
