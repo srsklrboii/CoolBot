@@ -573,11 +573,11 @@ bot.on('message', async function(message) {
         break;
 		    
 	case "dog":
-		let {dog} = await superagent
+		let {body} = await superagent
 		.get(`http://random.dog/woof.json`);
 		var embed = new Discord.RichEmbed()
 			.setAuthor("Here's a dog for you!")
-			.setImage(dog.url)
+			.setImage(body.url)
 			.setFooter(`Credits: created by ${owner}`)
 			.setColor("RANDOM")
 		message.channel.send(embed).catch(e => {
@@ -586,11 +586,11 @@ bot.on('message', async function(message) {
 	break;
 		    
 	case "cat":
-		let {cat} = await superagent
+		let {body} = await superagent
 		.get(`http://random.cat/meow`);
 		var embed = new Discord.RichEmbed()
 			.setAuthor("Here's a cat for you!")
-			.setImage(cat.url)
+			.setImage(body.url)
 			.setFooter(`Credits: created by ${owner}`)
 			.setColor("RANDOM")
 		message.channel.send(embed).catch(e => {
