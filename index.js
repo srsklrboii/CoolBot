@@ -10,6 +10,7 @@ const ytdl = require("ytdl-core")
 const Fortnite = require("fortnite")
 const stats = new Fortnite(process.env.TRN)
 const encode = require("strict-uri-encode")
+const superagent = require("superagent")
 //const token = "token here" (if you wanna local host the bot)
 
 var ball = [
