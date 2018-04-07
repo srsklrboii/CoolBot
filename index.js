@@ -197,7 +197,7 @@ bot.on('message', async function(message) {
             .addField("Music Commands", "]play <youtube url>, ]stop")
             .addField("Fun Music Commands", "]nootnoot, ]imgay")
             .addField("Search Commands", "]search <search query here>, ]fortnite <pc/xb1/ps4> <player name>")
-	    .addField("Animals", "]dog, ]cat")
+	    .addField("Animals", "]dog")
             .addField("Moderation Commands", "]kick <user> <reason>, ]ban <user> <reason>, ]purge <number between 1 and 100>, ]mute <user>, ]unmute <user>")
             .addField("Other Commands", "]botinfo, ]invite, ]credits")
             .addBlankField()
