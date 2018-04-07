@@ -563,7 +563,7 @@ bot.on('message', async function(message) {
 				.addField("Kills Per Minute", data.lifetimeStats[12].value, true)
 				.addField("Time Played", data.lifetimeStats[13].value, true)
 				.addField("Average Survival Time", data.lifetimeStats[14].value, true)
-				.setFooter("Credits: created by srsklrboii#5784")
+				.setFooter(`Credits: created by ${owner}`)
 				.setColor("RANDOM")
 			message.channel.send(embed).catch(e => {
 				message.channel.send("Woops! Looks like I can't send embeds to the chat! Join our Discord if this issue is persisting: https://discord.gg/9JTSAvH")
