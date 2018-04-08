@@ -11,6 +11,7 @@ const Fortnite = require("fortnite")
 const stats = new Fortnite(process.env.TRN)
 const encode = require("strict-uri-encode")
 const superagent = require("superagent")
+const queue = new Map()
 //const token = "token here" (if you wanna local host the bot)
 
 var ball = [
@@ -180,7 +181,7 @@ bot.on('message', async function(message) {
     if (message.author.equals(bot.user)) return;
     if (!message.content.startsWith(prefix)) return;
     if (message.channel.type === "dm") return message.channel.send("Please execute this command in a server!")
-
+    const serverQueue = queue.get(message.guild.id)	
     var args = message.content.substring(prefix.length).split(" ")
 
     switch (args[0].toLowerCase()) {
@@ -482,26 +483,57 @@ bot.on('message', async function(message) {
         var voiceChannel = message.member.voiceChannel
         if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
         if (!voiceChannel.joinable) return message.channel.send("I cannot join that voice channel!")
-        try {
-            var connection = await voiceChannel.join()
-        } catch (error) {
-            message.channel.send("I could not play in the voice channel for an undefined reason!")
-        }
-        var dispatcher = connection.playStream(ytdl(args[1]))
-            .on('end', () => {
-                message.channel.send("Song has ended!")
-                voiceChannel.leave()
-            })
-        dispatcher.setVolumeLogarithmic(5 / 5)
-        message.channel.send(`Now playing ${args[1]}`)
+	const songInfo = await ytdl.getInfo(args[1])
+	const song = {
+		title: songInfo.title,
+		url: songInfo.video_url
+	}
+	if (!serverQueue) {
+		const queueConstruct = {
+			textChannel: message.channel,
+			voiceChannel: voiceChannel,
+			connection: null,
+			songs: [],
+			volume: 5,
+			playing: true
+		}
+	queue.set(message.guild.id, queueConstruct)
+	queueConstruct.songs.push(song)
+	    try {
+            	var connection = await voiceChannel.join()
+	    	queueConstruct.connection = connection
+		play(message.guild, queueConstruct.songs[0])
+            } catch (error) {
+            	message.channel.send("I could not play in the voice channel for an undefined reason!")
+		queue.delete(message.guild.id)
+            }
+	} else {
+	    serverQueue.songs.push(song)
+	    return message.channel.send(`**${song.title}** has been added to the queue.`)	
+	}
         break;
             
         case "stop":
         var voiceChannel = message.member.voiceChannel
         if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
-        voiceChannel.leave()
+	if (!serverQueue) {
+		message.channel.send("There's nothing playing that could be used!")
+		return;
+	}
+        serverQueue.songs = []
+	serverQueue.connection.dispatcher.end()
         message.channel.send("I have successfully left the voice channel!")
         break;
+		  
+	case "skip":
+	var voiceChannel = message.member.voiceChannel
+        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
+	if (!serverQueue) {
+		message.channel.send("There's nothing playing that could be used!")
+		return;
+	}
+	serverQueue.connection.dispatcher.end()
+	break;
 
         case "nootnoot":
         var voiceChannel = message.member.voiceChannel
@@ -687,5 +719,24 @@ bot.on('message', async function(message) {
         break;
     }
 })
+
+function play(guild, song) {
+	const serverQueue = queue.get(guild.id)
+	
+	if (!song) {
+		serverQueue.voiceChannel.leave()
+		queue.delete(guild.id)
+		return;
+	}
+	
+	var dispatcher = connection.playStream(ytdl(song.url))
+            .on('end', () => {
+                message.channel.send("Song has ended!")
+		serverQueue.songs.shift()
+                play(guild, serverQueue.songs[0])
+            })
+        dispatcher.setVolumeLogarithmic(serverQueue.volume / 5)
+}
+
 bot.login(process.env.TOKEN)
 //bot.login(token) (if u wanna local host the bot)
