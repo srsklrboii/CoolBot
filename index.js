@@ -11,7 +11,6 @@ const Fortnite = require("fortnite")
 const stats = new Fortnite(process.env.TRN)
 const encode = require("strict-uri-encode")
 const superagent = require("superagent")
-const queue = new Map()
 //const token = "token here" (if you wanna local host the bot)
 
 var ball = [
@@ -194,13 +193,11 @@ bot.on('message', async function(message) {
             .addField("8ball Commands", "]8ball <question here>")
             .addField("Rolling Dice", "]6sided, ]8sided, ]10sided")
             .addField("Rating Commands", "]gayrate <optional user>, ]lesbianrate <optional user>, ]straightrate <optional user>, ]bisexualrate <optional user>, ]dankrate <optional user>, ]waifurate <optional user>")
-            .addField("Fun Commands", "]punch <user>, ]stab <user>, ]shoot <user>, ]roast <user>, ]bomb <user>, ]annihilate <user>, ]rps <whatever here>")
-            .addField("Music Commands", "]play <youtube url>, ]stop")
+            .addField("Fun Commands", "]punch <user>, ]stab <user>, ]shoot <user>, ]roast <user>, ]bomb <user>, ]annihilate <user>, ]rps <whatever here>, ]dog")
             .addField("Fun Music Commands", "]nootnoot, ]imgay")
             .addField("Search Commands", "]search <search query here>, ]fortnite <pc/xb1/ps4> <player name>")
-	    .addField("Animals", "]dog")
             .addField("Moderation Commands", "]kick <user> <reason>, ]ban <user> <reason>, ]purge <number between 1 and 100>, ]mute <user>, ]unmute <user>")
-            .addField("Other Commands", "]botinfo, ]invite, ]credits")
+            .addField("Bot Commands", "]botinfo, ]invite, ]credits")
             .addBlankField()
             .addField("Please join our Discord server! It really helps us grow!", "https://discord.gg/9JTSAvH")
             .addField("Please consider upvoting our bot at Discord Bots, it well and truly helps us grow!", "https://discordbots.org/bot/416496004699783190?")
@@ -479,62 +476,6 @@ bot.on('message', async function(message) {
         message.channel.send(rpswinlose[Math.floor(Math.random() * rpswinlose.length)])
         break;
 
-        case "play":
-        var voiceChannel = message.member.voiceChannel
-        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
-        if (!voiceChannel.joinable) return message.channel.send("I cannot join that voice channel!")
-	const songInfo = await ytdl.getInfo(args[1])
-	const song = {
-		title: songInfo.title,
-		url: songInfo.video_url
-	}
-	if (!serverQueue) {
-		const queueConstruct = {
-			textChannel: message.channel,
-			voiceChannel: voiceChannel,
-			connection: null,
-			songs: [],
-			volume: 5,
-			playing: true
-		}
-	queue.set(message.guild.id, queueConstruct)
-	queueConstruct.songs.push(song)
-	    try {
-            	var connection = await voiceChannel.join()
-	    	queueConstruct.connection = connection
-		play(message.guild, queueConstruct.songs[0])
-            } catch (error) {
-            	message.channel.send("I could not play in the voice channel for an undefined reason!")
-		queue.delete(message.guild.id)
-            }
-	} else {
-	    serverQueue.songs.push(song)
-	    return message.channel.send(`**${song.title}** has been added to the queue.`)	
-	}
-        break;
-            
-        case "stop":
-        var voiceChannel = message.member.voiceChannel
-        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
-	if (!serverQueue) {
-		message.channel.send("There's nothing playing that could be used!")
-		return;
-	}
-        serverQueue.songs = []
-	serverQueue.connection.dispatcher.end()
-        message.channel.send("I have successfully left the voice channel!")
-        break;
-		  
-	case "skip":
-	var voiceChannel = message.member.voiceChannel
-        if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
-	if (!serverQueue) {
-		message.channel.send("There's nothing playing that could be used!")
-		return;
-	}
-	serverQueue.connection.dispatcher.end()
-	break;
-
         case "nootnoot":
         var voiceChannel = message.member.voiceChannel
         if (!voiceChannel) return message.channel.send("You are not in a voice channel!")
@@ -719,24 +660,5 @@ bot.on('message', async function(message) {
         break;
     }
 })
-
-function play(guild, song) {
-	const serverQueue = queue.get(guild.id)
-	
-	if (!song) {
-		serverQueue.voiceChannel.leave()
-		queue.delete(guild.id)
-		return;
-	}
-	
-	var dispatcher = connection.playStream(ytdl(song.url))
-            .on('end', () => {
-                message.channel.send("Song has ended!")
-		serverQueue.songs.shift()
-                play(guild, serverQueue.songs[0])
-            })
-        dispatcher.setVolumeLogarithmic(serverQueue.volume / 5)
-}
-
 bot.login(process.env.TOKEN)
 //bot.login(token) (if u wanna local host the bot)
