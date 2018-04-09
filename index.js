@@ -180,7 +180,6 @@ bot.on('message', async function(message) {
     if (message.author.equals(bot.user)) return;
     if (!message.content.startsWith(prefix)) return;
     if (message.channel.type === "dm") return message.channel.send("Please execute this command in a server!")
-    const serverQueue = queue.get(message.guild.id)	
     var args = message.content.substring(prefix.length).split(" ")
 
     switch (args[0].toLowerCase()) {
